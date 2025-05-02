@@ -14,54 +14,139 @@ class LoginView extends StatelessWidget {
 
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(),
-      builder: (context, viewModel, child) {
+      builder: (context, viewModel, _) {
         return Scaffold(
-          appBar: AppBar(title: const Text('Login')),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextField(
-                  controller: usernameController,
-                  decoration: const InputDecoration(labelText: 'Username'),
+          backgroundColor: const Color(0xFFF2EAFB), // light purple background
+          body: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFFB388EB), // medium purple
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
                 ),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: 'Password'),
-                ),
-                const SizedBox(height: 20),
-                if (viewModel.errorMessage != null)
-                  Text(
-                    viewModel.errorMessage!,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                ElevatedButton(
-                  onPressed:
-                      viewModel.isBusy
-                          ? null
-                          : () async {
-                            final user = await viewModel.login(
-                              usernameController.text.trim(),
-                              passwordController.text.trim(),
-                            );
-
-                            if (user != null && context.mounted) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const ProductsView(),
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Welcome Back',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white, // white title
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    TextField(
+                      controller: usernameController,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                        labelStyle: const TextStyle(color: Colors.white),
+                        prefixIcon: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        labelStyle: const TextStyle(color: Colors.white),
+                        prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    if (viewModel.errorMessage != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          viewModel.errorMessage!,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        icon: const Icon(Icons.login, color: Colors.white),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(
+                            0xFF8E44AD,
+                          ), // deeper purple
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        label:
+                            viewModel.isBusy
+                                ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                                : const Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              );
-                            }
-                          },
+                        onPressed:
+                            viewModel.isBusy
+                                ? null
+                                : () async {
+                                  final user = await viewModel.login(
+                                    usernameController.text.trim(),
+                                    passwordController.text.trim(),
+                                  );
 
-                  child:
-                      viewModel.isBusy
-                          ? const CircularProgressIndicator()
-                          : const Text('Login'),
+                                  if (user != null && context.mounted) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => const ProductsView(),
+                                      ),
+                                    );
+                                  }
+                                },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         );

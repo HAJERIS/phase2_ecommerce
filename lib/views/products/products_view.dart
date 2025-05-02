@@ -1,9 +1,9 @@
-import 'package:ecommerce/views/cart/cart_view.dart';
-import 'package:ecommerce/views/product_detail/product_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../viewmodels/products_viewmodel.dart';
+import '../cart/cart_view.dart';
+import '../product_detail/product_detail_view.dart';
 
 class ProductsView extends StatelessWidget {
   const ProductsView({super.key});
@@ -12,10 +12,12 @@ class ProductsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProductsViewModel>.reactive(
       viewModelBuilder: () => ProductsViewModel()..loadProducts(),
-      builder: (context, viewModel, child) {
+      builder: (context, viewModel, _) {
         return Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             title: const Text('Products'),
+            backgroundColor: const Color(0xFF8E44AD), // deep purple
             actions: [
               IconButton(
                 icon: const Icon(Icons.shopping_cart),
@@ -33,31 +35,68 @@ class ProductsView extends StatelessWidget {
                   ? const Center(child: CircularProgressIndicator())
                   : viewModel.errorMessage != null
                   ? Center(child: Text(viewModel.errorMessage!))
-                  : ListView.builder(
-                    itemCount: viewModel.products.length,
-                    itemBuilder: (context, index) {
-                      final product = viewModel.products[index];
-                      return ListTile(
-                        leading: Image.network(
-                          product.thumbnail,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                        ),
-                        title: Text(product.title),
-                        subtitle: Text(product.description),
-                        trailing: Text('\$${product.price.toStringAsFixed(2)}'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (_) => ProductDetailView(product: product),
+                  : Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ListView.builder(
+                      itemCount: viewModel.products.length,
+                      itemBuilder: (context, index) {
+                        final product = viewModel.products[index];
+                        return Card(
+                          elevation: 6,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.all(12),
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                product.thumbnail,
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          );
-                        },
-                      );
-                    },
+                            title: Text(
+                              product.title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              product.description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (_) =>
+                                            ProductDetailView(product: product),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(
+                                  0xFFB388EB,
+                                ), // light purple
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text(
+                                'View',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
         );
       },

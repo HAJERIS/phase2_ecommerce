@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Phase 2 Ecommerce',
+      debugShowCheckedModeBanner: false,
+
       theme: ThemeData(primarySwatch: Colors.green),
       home: const LoginView(),
     );
