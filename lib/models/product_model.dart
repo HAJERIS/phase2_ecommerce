@@ -4,7 +4,7 @@ class Product {
   final String description;
   final String thumbnail;
   final double price;
-  bool isWishlisted; // NEW
+  bool isWishlisted;
 
   Product({
     required this.id,
@@ -12,7 +12,7 @@ class Product {
     required this.description,
     required this.thumbnail,
     required this.price,
-    this.isWishlisted = false, // NEW
+    this.isWishlisted = false,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {

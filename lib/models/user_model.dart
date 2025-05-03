@@ -16,7 +16,7 @@ class User {
       id: json['id'],
       username: json['username'],
       email: json['email'] ?? '',
-      token: json['accessToken'] ?? '', // <-- UPDATED HERE
+      token: json['accessToken'] ?? '',
     );
   }
 }

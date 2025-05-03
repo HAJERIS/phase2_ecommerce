@@ -19,7 +19,7 @@ class ProductsViewModel extends BaseViewModel {
 
     try {
       products = await _productService.fetchProducts();
-      filteredProducts = []; // Start with full list view
+      filteredProducts = [];
     } catch (e) {
       errorMessage = e.toString();
     } finally {
