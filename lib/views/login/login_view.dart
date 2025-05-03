@@ -16,19 +16,19 @@ class LoginView extends StatelessWidget {
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, viewModel, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF2EAFB), // light purple background
+          backgroundColor: Colors.white,
           body: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFB388EB), // medium purple
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
-                      blurRadius: 20,
-                      spreadRadius: 5,
+                      blurRadius: 30,
+                      spreadRadius: 3,
                       offset: const Offset(0, 10),
                     ),
                   ],
@@ -42,26 +42,30 @@ class LoginView extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white, // white title
+                        color: Color.fromARGB(255, 31, 31, 31),
                       ),
                     ),
                     const SizedBox(height: 24),
                     TextField(
                       controller: usernameController,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 31, 31, 31),
+                      ),
                       decoration: InputDecoration(
                         labelText: 'Username',
-                        labelStyle: const TextStyle(color: Colors.white),
+                        labelStyle: const TextStyle(color: Colors.grey),
                         prefixIcon: const Icon(
                           Icons.person,
-                          color: Colors.white,
+                          color: Colors.grey,
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
+                          borderSide: const BorderSide(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 31, 31, 31),
+                          ),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -70,17 +74,21 @@ class LoginView extends StatelessWidget {
                     TextField(
                       controller: passwordController,
                       obscureText: true,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 31, 31, 31),
+                      ),
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        labelStyle: const TextStyle(color: Colors.white),
-                        prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                        labelStyle: const TextStyle(color: Colors.grey),
+                        prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
+                          borderSide: const BorderSide(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 31, 31, 31),
+                          ),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -91,7 +99,7 @@ class LoginView extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text(
                           viewModel.errorMessage!,
-                          style: const TextStyle(color: Colors.red),
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       ),
                     SizedBox(
@@ -99,8 +107,11 @@ class LoginView extends StatelessWidget {
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.login, color: Colors.white),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(
-                            0xFF8E44AD,
+                          backgroundColor: Color.fromARGB(
+                            255,
+                            31,
+                            31,
+                            31,
                           ), // deeper purple
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(

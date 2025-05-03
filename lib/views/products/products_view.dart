@@ -17,7 +17,7 @@ class ProductsView extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             title: const Text('Products'),
-            backgroundColor: const Color(0xFF8E44AD), // deep purple
+            backgroundColor: Colors.white,
             actions: [
               IconButton(
                 icon: const Icon(Icons.shopping_cart),
@@ -42,12 +42,22 @@ class ProductsView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final product = viewModel.products[index];
                         return Card(
-                          elevation: 6,
+                          elevation: 0,
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (_) =>
+                                          ProductDetailView(product: product),
+                                ),
+                              );
+                            },
                             contentPadding: const EdgeInsets.all(12),
                             leading: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
@@ -66,32 +76,8 @@ class ProductsView extends StatelessWidget {
                             ),
                             subtitle: Text(
                               product.description,
-                              maxLines: 2,
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                            ),
-                            trailing: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (_) =>
-                                            ProductDetailView(product: product),
-                                  ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(
-                                  0xFFB388EB,
-                                ), // light purple
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              child: const Text(
-                                'View',
-                                style: TextStyle(color: Colors.white),
-                              ),
                             ),
                           ),
                         );

@@ -15,10 +15,10 @@ class ProductDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(product.title)),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Image.network(product.thumbnail, height: 200),
+            Image.network(product.thumbnail, height: 300),
             const SizedBox(height: 16),
             Text(product.description, style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 8),
