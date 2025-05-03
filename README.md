@@ -1,5 +1,8 @@
 # ecommerce
 
+username: emilys
+password: emilyspass
+
 A new Flutter project.
 
 ## Getting Started
